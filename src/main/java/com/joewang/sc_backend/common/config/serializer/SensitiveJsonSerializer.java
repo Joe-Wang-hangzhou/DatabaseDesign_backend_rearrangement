@@ -7,9 +7,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.joewang.sc_backend.common.annotation.Sensitive;
-import com.joewang.sc_backend.common.core.domain.model.LoginUser;
 import com.joewang.sc_backend.common.enums.DesensitizedType;
-import com.joewang.sc_backend.common.utils.SecurityUtils;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -51,18 +49,10 @@ public class SensitiveJsonSerializer extends JsonSerializer<String> implements C
 
     /**
      * 是否需要脱敏处理
+     * 由于项目不需要登录功能，默认总是进行脱敏处理
      */
     private boolean desensitization()
     {
-        try
-        {
-            LoginUser securityUser = SecurityUtils.getLoginUser();
-            // 管理员不脱敏
-            return !securityUser.getUser().isAdmin();
-        }
-        catch (Exception e)
-        {
-            return true;
-        }
+        return true;
     }
 }

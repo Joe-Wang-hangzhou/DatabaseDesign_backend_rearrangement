@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScTeaching;
 import com.joewang.sc_backend.system.service.IScTeachingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScTeachingController extends BaseController
     /**
      * 查询授课列表
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScTeaching scTeaching)
     {
@@ -43,7 +41,6 @@ public class ScTeachingController extends BaseController
     /**
      * 导出授课列表
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:export')")
     @Log(title = "授课", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScTeaching scTeaching)
@@ -56,7 +53,6 @@ public class ScTeachingController extends BaseController
     /**
      * 获取授课详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScTeachingController extends BaseController
     /**
      * 新增授课
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:add')")
     @Log(title = "授课", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScTeaching scTeaching)
@@ -77,7 +72,6 @@ public class ScTeachingController extends BaseController
     /**
      * 修改授课
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:edit')")
     @Log(title = "授课", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScTeaching scTeaching)
@@ -88,7 +82,6 @@ public class ScTeachingController extends BaseController
     /**
      * 删除授课
      */
-    @PreAuthorize("@ss.hasPermi('system:teachingofSc:remove')")
     @Log(title = "授课", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

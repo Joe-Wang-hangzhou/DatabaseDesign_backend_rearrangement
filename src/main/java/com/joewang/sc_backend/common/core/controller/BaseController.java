@@ -4,13 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.joewang.sc_backend.common.constant.HttpStatus;
 import com.joewang.sc_backend.common.core.domain.AjaxResult;
-import com.joewang.sc_backend.common.core.domain.model.LoginUser;
 import com.joewang.sc_backend.common.core.page.PageDomain;
 import com.joewang.sc_backend.common.core.page.TableDataInfo;
 import com.joewang.sc_backend.common.core.page.TableSupport;
 import com.joewang.sc_backend.common.utils.DateUtils;
 import com.joewang.sc_backend.common.utils.PageUtils;
-import com.joewang.sc_backend.common.utils.SecurityUtils;
 import com.joewang.sc_backend.common.utils.StringUtils;
 import com.joewang.sc_backend.common.utils.sql.SqlUtil;
 import org.slf4j.Logger;
@@ -169,35 +167,36 @@ public class BaseController
         return StringUtils.format("redirect:{}", url);
     }
 
-    /**
-     * 获取用户缓存信息
-     */
-    public LoginUser getLoginUser()
-    {
-        return SecurityUtils.getLoginUser();
-    }
-
-    /**
-     * 获取登录用户id
-     */
-    public Long getUserId()
-    {
-        return getLoginUser().getUserId();
-    }
-
-    /**
-     * 获取登录部门id
-     */
-    public Long getDeptId()
-    {
-        return getLoginUser().getDeptId();
-    }
-
-    /**
-     * 获取登录用户名
-     */
-    public String getUsername()
-    {
-        return getLoginUser().getUsername();
-    }
+    // 以下方法已注释，因为项目不需要登录功能
+    // /**
+    //  * 获取用户缓存信息
+    //  */
+    // public LoginUser getLoginUser()
+    // {
+    //     return SecurityUtils.getLoginUser();
+    // }
+    //
+    // /**
+    //  * 获取登录用户id
+    //  */
+    // public Long getUserId()
+    // {
+    //     return getLoginUser().getUserId();
+    // }
+    //
+    // /**
+    //  * 获取登录部门id
+    //  */
+    // public Long getDeptId()
+    // {
+    //     return getLoginUser().getDeptId();
+    // }
+    //
+    // /**
+    //  * 获取登录用户名
+    //  */
+    // public String getUsername()
+    // {
+    //     return getLoginUser().getUsername();
+    // }
 }

@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScAdmin;
 import com.joewang.sc_backend.system.service.IScAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScAdminController extends BaseController
     /**
      * 查询管理员列表
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScAdmin scAdmin)
     {
@@ -43,7 +41,6 @@ public class ScAdminController extends BaseController
     /**
      * 导出管理员列表
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:export')")
     @Log(title = "管理员", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScAdmin scAdmin)
@@ -56,7 +53,6 @@ public class ScAdminController extends BaseController
     /**
      * 获取管理员详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScAdminController extends BaseController
     /**
      * 新增管理员
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:add')")
     @Log(title = "管理员", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScAdmin scAdmin)
@@ -77,7 +72,6 @@ public class ScAdminController extends BaseController
     /**
      * 修改管理员
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:edit')")
     @Log(title = "管理员", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScAdmin scAdmin)
@@ -88,7 +82,6 @@ public class ScAdminController extends BaseController
     /**
      * 删除管理员
      */
-    @PreAuthorize("@ss.hasPermi('system:adminofSc:remove')")
     @Log(title = "管理员", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

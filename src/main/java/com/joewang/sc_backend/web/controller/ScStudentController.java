@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScStudent;
 import com.joewang.sc_backend.system.service.IScStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScStudentController extends BaseController
     /**
      * 查询学生列表
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScStudent scStudent)
     {
@@ -43,7 +41,6 @@ public class ScStudentController extends BaseController
     /**
      * 导出学生列表
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:export')")
     @Log(title = "学生", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScStudent scStudent)
@@ -56,7 +53,6 @@ public class ScStudentController extends BaseController
     /**
      * 获取学生详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScStudentController extends BaseController
     /**
      * 新增学生
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:add')")
     @Log(title = "学生", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScStudent scStudent)
@@ -77,7 +72,6 @@ public class ScStudentController extends BaseController
     /**
      * 修改学生
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:edit')")
     @Log(title = "学生", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScStudent scStudent)
@@ -88,7 +82,6 @@ public class ScStudentController extends BaseController
     /**
      * 删除学生
      */
-    @PreAuthorize("@ss.hasPermi('system:studentofSc:remove')")
     @Log(title = "学生", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

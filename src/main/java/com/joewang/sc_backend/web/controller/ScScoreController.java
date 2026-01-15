@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScScore;
 import com.joewang.sc_backend.system.service.IScScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScScoreController extends BaseController
     /**
      * 查询成绩列表
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScScore scScore)
     {
@@ -43,7 +41,6 @@ public class ScScoreController extends BaseController
     /**
      * 导出成绩列表
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:export')")
     @Log(title = "成绩", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScScore scScore)
@@ -56,7 +53,6 @@ public class ScScoreController extends BaseController
     /**
      * 获取成绩详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScScoreController extends BaseController
     /**
      * 新增成绩
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:add')")
     @Log(title = "成绩", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScScore scScore)
@@ -77,7 +72,6 @@ public class ScScoreController extends BaseController
     /**
      * 修改成绩
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:edit')")
     @Log(title = "成绩", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScScore scScore)
@@ -88,7 +82,6 @@ public class ScScoreController extends BaseController
     /**
      * 删除成绩
      */
-    @PreAuthorize("@ss.hasPermi('system:scoreofSC:remove')")
     @Log(title = "成绩", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

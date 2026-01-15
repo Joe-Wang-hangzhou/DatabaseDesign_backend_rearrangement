@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScCollege;
 import com.joewang.sc_backend.system.service.IScCollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScCollegeController extends BaseController
     /**
      * 查询学院列表
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScCollege scCollege)
     {
@@ -43,7 +41,6 @@ public class ScCollegeController extends BaseController
     /**
      * 导出学院列表
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:export')")
     @Log(title = "学院", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScCollege scCollege)
@@ -56,7 +53,6 @@ public class ScCollegeController extends BaseController
     /**
      * 获取学院详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScCollegeController extends BaseController
     /**
      * 新增学院
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:add')")
     @Log(title = "学院", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScCollege scCollege)
@@ -77,7 +72,6 @@ public class ScCollegeController extends BaseController
     /**
      * 修改学院
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:edit')")
     @Log(title = "学院", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScCollege scCollege)
@@ -88,7 +82,6 @@ public class ScCollegeController extends BaseController
     /**
      * 删除学院
      */
-    @PreAuthorize("@ss.hasPermi('system:collegeofSc:remove')")
     @Log(title = "学院", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

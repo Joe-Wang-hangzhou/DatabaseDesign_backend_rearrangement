@@ -9,7 +9,6 @@ import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
 import com.joewang.sc_backend.system.domain.ScEnrollment;
 import com.joewang.sc_backend.system.service.IScEnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 查询选课列表
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:list')")
     @GetMapping("/list")
     public TableDataInfo list(ScEnrollment scEnrollment)
     {
@@ -43,7 +41,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 导出选课列表
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:export')")
     @Log(title = "选课", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, ScEnrollment scEnrollment)
@@ -56,7 +53,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 获取选课详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -66,7 +62,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 新增选课
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:add')")
     @Log(title = "选课", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody ScEnrollment scEnrollment)
@@ -77,7 +72,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 修改选课
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:edit')")
     @Log(title = "选课", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody ScEnrollment scEnrollment)
@@ -88,7 +82,6 @@ public class ScEnrollmentController extends BaseController
     /**
      * 删除选课
      */
-    @PreAuthorize("@ss.hasPermi('system:enrollmentofSc:remove')")
     @Log(title = "选课", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
