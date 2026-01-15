@@ -117,17 +117,24 @@ public class MyBatisConfig
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception
     {
-        String typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
-        String mapperLocations = env.getProperty("mybatis.mapperLocations");
-        String configLocation = env.getProperty("mybatis.configLocation");
+        String typeAliasesPackage = env.getProperty("mybatis.type-aliases-package");
+        String mapperLocations = env.getProperty("mybatis.mapper-locations");
+        String configLocation = env.getProperty("mybatis.config-location");
+        if (typeAliasesPackage == null || typeAliasesPackage.isEmpty()) {
+            throw new RuntimeException("mybatis.type-aliases-package 配置不能为空");
+        }
         typeAliasesPackage = setTypeAliasesPackage(typeAliasesPackage);
         VFS.addImplClass(SpringBootVFS.class);
 
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setTypeAliasesPackage(typeAliasesPackage);
-        sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
-        sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
+        if (mapperLocations != null && !mapperLocations.isEmpty()) {
+            sessionFactory.setMapperLocations(resolveMapperLocations(StringUtils.split(mapperLocations, ",")));
+        }
+        if (configLocation != null && !configLocation.isEmpty()) {
+            sessionFactory.setConfigLocation(new DefaultResourceLoader().getResource(configLocation));
+        }
         return sessionFactory.getObject();
     }
 }
