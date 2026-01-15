@@ -117,11 +117,25 @@ public class MyBatisConfig
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception
     {
+        // 同时支持 kebab-case 和 camelCase 格式
         String typeAliasesPackage = env.getProperty("mybatis.type-aliases-package");
-        String mapperLocations = env.getProperty("mybatis.mapper-locations");
-        String configLocation = env.getProperty("mybatis.config-location");
         if (typeAliasesPackage == null || typeAliasesPackage.isEmpty()) {
-            throw new RuntimeException("mybatis.type-aliases-package 配置不能为空");
+            typeAliasesPackage = env.getProperty("mybatis.typeAliasesPackage");
+        }
+        String mapperLocations = env.getProperty("mybatis.mapper-locations");
+        if (mapperLocations == null || mapperLocations.isEmpty()) {
+            mapperLocations = env.getProperty("mybatis.mapperLocations");
+        }
+        String configLocation = env.getProperty("mybatis.config-location");
+        if (configLocation == null || configLocation.isEmpty()) {
+            configLocation = env.getProperty("mybatis.configLocation");
+        }
+        if (typeAliasesPackage == null || typeAliasesPackage.isEmpty()) {
+            throw new RuntimeException("mybatis.type-aliases-package 或 mybatis.typeAliasesPackage 配置不能为空");
+        }
+        // 确保包含 common.core.domain.entity 包（包含 SysDept, SysUser, SysRole 等）
+        if (!typeAliasesPackage.contains("com.joewang.sc_backend.common.core.domain.entity")) {
+            typeAliasesPackage += ",com.joewang.sc_backend.common.core.domain.entity";
         }
         typeAliasesPackage = setTypeAliasesPackage(typeAliasesPackage);
         VFS.addImplClass(SpringBootVFS.class);
