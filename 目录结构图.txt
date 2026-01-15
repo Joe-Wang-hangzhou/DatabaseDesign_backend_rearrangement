@@ -1,0 +1,139 @@
+═══════════════════════════════════════════════════════════════
+  最终项目目录结构（单模块Spring Boot项目）
+═══════════════════════════════════════════════════════════════
+
+your-new-project/                          ← 你的新项目根目录
+│
+├── pom.xml                                ← 使用 pom-merged-core.xml
+│
+└── src/
+    └── main/
+        │
+        ├── java/
+        │   └── com/
+        │       └── yourpackage/           ← 你的包名（替换com.ruoyi）
+        │           │
+        │           ├── YourApplication.java  ← 启动类（保留或替换）
+        │           │
+        │           ├── common/            ← 【从 ruoyi-common 拷贝】
+        │           │   ├── annotation/    (注解)
+        │           │   ├── config/       (配置)
+        │           │   ├── constant/     (常量)
+        │           │   ├── core/         (核心类：BaseController、AjaxResult等)
+        │           │   ├── enums/        (枚举)
+        │           │   ├── exception/    (异常)
+        │           │   ├── filter/       (过滤器)
+        │           │   ├── utils/        (工具类)
+        │           │   └── xss/          (XSS防护)
+        │           │
+        │           ├── system/           ← 【从 ruoyi-system 拷贝】
+        │           │   ├── domain/       (实体类：ScAdmin、ScClass等)
+        │           │   ├── mapper/       (Mapper接口)
+        │           │   └── service/      (Service接口和实现)
+        │           │       ├── IScAdminService.java
+        │           │       ├── ISqlConsoleService.java
+        │           │       └── impl/
+        │           │
+        │           ├── framework/         ← 【从 ruoyi-framework 拷贝】
+        │           │   ├── aspectj/      (AOP切面)
+        │           │   ├── config/       (配置类：SecurityConfig等)
+        │           │   ├── datasource/   (数据源)
+        │           │   ├── interceptor/  (拦截器)
+        │           │   ├── manager/      (管理器)
+        │           │   ├── security/     (安全相关)
+        │           │   └── web/          (Web相关)
+        │           │
+        │           └── web/               ← 【从 ruoyi-admin 拷贝】
+        │               ├── controller/
+        │               │   ├── common/   ? 保留（验证码等）
+        │               │   │   ├── CaptchaController.java
+        │               │   │   └── CommonController.java
+        │               │   │
+        │               │   ├── system/   ? 保留（系统管理）
+        │               │   │   ├── SqlConsoleController.java  ← SQL控制台
+        │               │   │   ├── SysIndexController.java    ← 首页
+        │               │   │   ├── SysLoginController.java
+        │               │   │   ├── SysUserController.java
+        │               │   │   └── ... (其他系统Controller)
+        │               │   │
+        │               │   ├── ScAdminController.java      ? 保留
+        │               │   ├── ScClassController.java      ? 保留
+        │               │   ├── ScCollegeController.java     ? 保留
+        │               │   ├── ScCourseController.java      ? 保留
+        │               │   ├── ScEnrollmentController.java  ? 保留（选课）
+        │               │   ├── ScMajorController.java       ? 保留
+        │               │   ├── ScScoreController.java        ? 保留（成绩）
+        │               │   ├── ScStudentController.java      ? 保留
+        │               │   ├── ScTeacherController.java      ? 保留
+        │               │   └── ScTeachingController.java     ? 保留（授课）
+        │               │
+        │               │   ├── monitor/  ? 删除（监控功能不需要）
+        │               │   └── tool/     ? 删除（工具功能不需要）
+        │               │
+        │               └── core/
+        │                   └── config/
+        │                       └── SwaggerConfig.java
+        │
+        └── resources/
+            ├── application.yml           ← 【从 ruoyi-admin 拷贝】
+            ├── application-druid.yml     ← 【从 ruoyi-admin 拷贝】
+            ├── logback.xml               ← 【从 ruoyi-admin 拷贝】
+            ├── banner.txt                ← 可选
+            │
+            ├── i18n/                     ← 【从 ruoyi-admin 拷贝】
+            │   └── messages.properties
+            │
+            ├── mapper/                    ← 【合并所有Mapper XML】
+            │   ├── system/               ← 【从 ruoyi-system 拷贝】
+            │   │   ├── ScAdminMapper.xml
+            │   │   ├── ScClassMapper.xml
+            │   │   ├── ScCollegeMapper.xml
+            │   │   ├── ScCourseMapper.xml
+            │   │   ├── ScEnrollmentMapper.xml
+            │   │   ├── ScMajorMapper.xml
+            │   │   ├── ScScoreMapper.xml
+            │   │   ├── ScStudentMapper.xml
+            │   │   ├── ScTeacherMapper.xml
+            │   │   ├── ScTeachingMapper.xml
+            │   │   └── ... (其他Mapper XML)
+            │   │
+            │   └── course/                ← 【从 ruoyi-admin 拷贝（如果有）】
+            │       └── CourseMapper.xml
+            │
+            └── mybatis/
+                └── mybatis-config.xml   ← 【从 ruoyi-admin 拷贝】
+
+═══════════════════════════════════════════════════════════════
+  拷贝来源对照表
+═══════════════════════════════════════════════════════════════
+
+源模块                    →  目标位置
+─────────────────────────────────────────────────────────────
+ruoyi-common/             →  src/main/java/com/yourpackage/common/
+ruoyi-system/             →  src/main/java/com/yourpackage/system/
+ruoyi-framework/          →  src/main/java/com/yourpackage/framework/
+ruoyi-admin/web/          →  src/main/java/com/yourpackage/web/
+ruoyi-admin/resources/    →  src/main/resources/
+ruoyi-system/mapper/      →  src/main/resources/mapper/system/
+
+═══════════════════════════════════════════════════════════════
+  启动类处理方案
+═══════════════════════════════════════════════════════════════
+
+方案A：使用RuoYi的启动类（推荐）
+─────────────────────────────────────────────────────────────
+位置：src/main/java/com/yourpackage/YourApplication.java
+
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+public class YourApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(YourApplication.class, args);
+    }
+}
+
+方案B：保留你的启动类
+─────────────────────────────────────────────────────────────
+只需添加：
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+
+═══════════════════════════════════════════════════════════════
