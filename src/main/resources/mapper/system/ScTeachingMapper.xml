@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.system.mapper.ScTeachingMapper">
+    
+    <resultMap type="ScTeaching" id="ScTeachingResult">
+        <result property="id"    column="id"    />
+        <result property="teacherId"    column="teacher_id"    />
+        <result property="courseId"    column="course_id"    />
+        <result property="semester"    column="semester"    />
+    </resultMap>
+
+    <sql id="selectScTeachingVo">
+        select id, teacher_id, course_id, semester from sc_teaching
+    </sql>
+
+    <select id="selectScTeachingList" parameterType="ScTeaching" resultMap="ScTeachingResult">
+        <include refid="selectScTeachingVo"/>
+        <where>  
+            <if test="teacherId != null "> and teacher_id = #{teacherId}</if>
+            <if test="courseId != null "> and course_id = #{courseId}</if>
+            <if test="semester != null  and semester != ''"> and semester = #{semester}</if>
+        </where>
+    </select>
+    
+    <select id="selectScTeachingById" parameterType="Long" resultMap="ScTeachingResult">
+        <include refid="selectScTeachingVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScTeaching" parameterType="ScTeaching" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_teaching
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">teacher_id,</if>
+            <if test="courseId != null">course_id,</if>
+            <if test="semester != null">semester,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">#{teacherId},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="semester != null">#{semester},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScTeaching" parameterType="ScTeaching">
+        update sc_teaching
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherId != null">teacher_id = #{teacherId},</if>
+            <if test="courseId != null">course_id = #{courseId},</if>
+            <if test="semester != null">semester = #{semester},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScTeachingById" parameterType="Long">
+        delete from sc_teaching where id = #{id}
+    </delete>
+
+    <delete id="deleteScTeachingByIds" parameterType="String">
+        delete from sc_teaching where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.system.mapper.ScClassMapper">
+    
+    <resultMap type="ScClass" id="ScClassResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="majorId"    column="major_id"    />
+    </resultMap>
+
+    <sql id="selectScClassVo">
+        select id, name, major_id from sc_class
+    </sql>
+
+    <select id="selectScClassList" parameterType="ScClass" resultMap="ScClassResult">
+        <include refid="selectScClassVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="majorId != null "> and major_id = #{majorId}</if>
+        </where>
+    </select>
+    
+    <select id="selectScClassById" parameterType="Long" resultMap="ScClassResult">
+        <include refid="selectScClassVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScClass" parameterType="ScClass" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="majorId != null">major_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="majorId != null">#{majorId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScClass" parameterType="ScClass">
+        update sc_class
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="majorId != null">major_id = #{majorId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScClassById" parameterType="Long">
+        delete from sc_class where id = #{id}
+    </delete>
+
+    <delete id="deleteScClassByIds" parameterType="String">
+        delete from sc_class where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

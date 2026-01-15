@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.system.mapper.ScEnrollmentMapper">
+    
+    <resultMap type="ScEnrollment" id="ScEnrollmentResult">
+        <result property="id"    column="id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="teachingId"    column="teaching_id"    />
+    </resultMap>
+
+    <sql id="selectScEnrollmentVo">
+        select id, student_id, teaching_id from sc_enrollment
+    </sql>
+
+    <select id="selectScEnrollmentList" parameterType="ScEnrollment" resultMap="ScEnrollmentResult">
+        <include refid="selectScEnrollmentVo"/>
+        <where>  
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="teachingId != null "> and teaching_id = #{teachingId}</if>
+        </where>
+    </select>
+    
+    <select id="selectScEnrollmentById" parameterType="Long" resultMap="ScEnrollmentResult">
+        <include refid="selectScEnrollmentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScEnrollment" parameterType="ScEnrollment" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_enrollment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_id,</if>
+            <if test="teachingId != null">teaching_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="teachingId != null">#{teachingId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScEnrollment" parameterType="ScEnrollment">
+        update sc_enrollment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="teachingId != null">teaching_id = #{teachingId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScEnrollmentById" parameterType="Long">
+        delete from sc_enrollment where id = #{id}
+    </delete>
+
+    <delete id="deleteScEnrollmentByIds" parameterType="String">
+        delete from sc_enrollment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

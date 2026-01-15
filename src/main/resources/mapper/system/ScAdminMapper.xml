@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.system.mapper.ScAdminMapper">
+
+    <resultMap type="ScAdmin" id="ScAdminResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+    </resultMap>
+
+    <sql id="selectScAdminVo">
+        select id, username, password from sc_admin
+    </sql>
+
+    <select id="selectScAdminList" parameterType="ScAdmin" resultMap="ScAdminResult">
+        <include refid="selectScAdminVo"/>
+        <where>  
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+        </where>
+    </select>
+    
+    <select id="selectScAdminById" parameterType="Long" resultMap="ScAdminResult">
+        <include refid="selectScAdminVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScAdmin" parameterType="ScAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScAdmin" parameterType="ScAdmin">
+        update sc_admin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScAdminById" parameterType="Long">
+        delete from sc_admin where id = #{id}
+    </delete>
+
+    <delete id="deleteScAdminByIds" parameterType="String">
+        delete from sc_admin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

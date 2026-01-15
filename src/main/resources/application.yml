@@ -43,8 +43,16 @@ server:
 # Spring配置
 spring:
 
-  profiles:
-    active: druid
+#  profiles:
+#    active: druid
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ry-vue?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
   # 文件上传
 #  servlet:
 #    multipart:
@@ -92,11 +100,13 @@ token:
 # MyBatis配置
 mybatis:
   # 搜索指定包别名
-  typeAliasesPackage: com.joewang.**.domain
+#  typeAliasesPackage: com.joewang.**.domain
+  type-aliases-package: com.joewang.sc_backend.system.domain
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件
   configLocation: classpath:mybatis/mybatis-config.xml
+
 
 # PageHelper分页插件
 pagehelper:
