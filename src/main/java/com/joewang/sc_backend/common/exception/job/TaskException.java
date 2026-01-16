@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.exception.job;
 /**
  * 计划策略异常
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class TaskException extends Exception
 {

@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.constant;
 /**
  * 返回状态码
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class HttpStatus
 {

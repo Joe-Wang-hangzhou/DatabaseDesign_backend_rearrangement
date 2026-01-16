@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Swagger2的接口配置
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 @Configuration
 public class SwaggerConfig

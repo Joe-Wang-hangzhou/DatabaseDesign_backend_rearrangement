@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.exception;
 /**
  * 工具类异常
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class UtilException extends RuntimeException
 {

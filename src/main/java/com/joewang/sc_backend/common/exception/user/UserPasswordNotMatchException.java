@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.exception.user;
 /**
  * 用户密码不正确或不符合规范异常类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class UserPasswordNotMatchException extends UserException
 {

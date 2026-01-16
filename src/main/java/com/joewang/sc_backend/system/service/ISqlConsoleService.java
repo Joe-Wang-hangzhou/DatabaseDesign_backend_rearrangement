@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * SQL����̨ ҵ���
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public interface ISqlConsoleService
 {

@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.enums;
 /**
  * 操作人类别
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public enum OperatorType
 {

@@ -8,7 +8,7 @@ import com.joewang.sc_backend.common.utils.sql.SqlUtil;
 /**
  * 分页工具类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class PageUtils extends PageHelper
 {

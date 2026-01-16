@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.exception.user;
 /**
  * 用户错误最大次数异常类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class UserPasswordRetryLimitExceedException extends UserException
 {

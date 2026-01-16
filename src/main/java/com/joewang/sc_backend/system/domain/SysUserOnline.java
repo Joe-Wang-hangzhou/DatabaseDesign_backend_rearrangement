@@ -3,7 +3,7 @@ package com.joewang.sc_backend.system.domain;
 /**
  * 当前在线会话
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class SysUserOnline
 {

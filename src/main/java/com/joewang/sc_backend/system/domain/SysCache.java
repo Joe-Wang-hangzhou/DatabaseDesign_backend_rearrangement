@@ -5,7 +5,7 @@ import com.joewang.sc_backend.common.utils.StringUtils;
 /**
  * 缓存信息
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class SysCache
 {

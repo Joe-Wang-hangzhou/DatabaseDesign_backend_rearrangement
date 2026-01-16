@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 用户表 数据层
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public interface SysUserMapper
 {

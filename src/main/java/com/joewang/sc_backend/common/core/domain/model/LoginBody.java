@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.core.domain.model;
 /**
  * 用户登录对象
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class LoginBody
 {

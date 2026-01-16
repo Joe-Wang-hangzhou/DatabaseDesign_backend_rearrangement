@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.utils.uuid;
 /**
  * ID生成器工具类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class IdUtils
 {

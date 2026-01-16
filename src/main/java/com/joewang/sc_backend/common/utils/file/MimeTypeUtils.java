@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.utils.file;
 /**
  * 媒体类型工具类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class MimeTypeUtils
 {

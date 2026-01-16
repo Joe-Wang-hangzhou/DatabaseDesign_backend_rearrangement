@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 操作日志 数据层
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public interface SysOperLogMapper
 {

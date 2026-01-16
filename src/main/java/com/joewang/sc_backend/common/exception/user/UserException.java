@@ -5,7 +5,7 @@ import com.joewang.sc_backend.common.exception.base.BaseException;
 /**
  * 用户信息异常类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class UserException extends BaseException
 {

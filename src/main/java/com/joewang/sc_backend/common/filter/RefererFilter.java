@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 防盗链过滤器
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class RefererFilter implements Filter
 {

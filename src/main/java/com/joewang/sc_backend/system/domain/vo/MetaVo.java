@@ -5,7 +5,7 @@ import com.joewang.sc_backend.common.utils.StringUtils;
 /**
  * 路由显示信息
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class MetaVo
 {

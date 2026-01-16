@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.constant;
 /**
  * 用户常量信息
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class UserConstants
 {

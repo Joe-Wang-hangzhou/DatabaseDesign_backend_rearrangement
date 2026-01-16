@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.exception.file;
 /**
  * 文件名大小限制异常类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class FileSizeLimitExceededException extends FileException
 {

@@ -3,7 +3,7 @@ package com.joewang.sc_backend.common.constant;
 /**
  * 代码生成通用常量
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class GenConstants
 {

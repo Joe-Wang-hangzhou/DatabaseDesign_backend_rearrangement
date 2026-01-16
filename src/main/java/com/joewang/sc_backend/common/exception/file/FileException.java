@@ -5,7 +5,7 @@ import com.joewang.sc_backend.common.exception.base.BaseException;
 /**
  * 文件信息异常类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class FileException extends BaseException
 {

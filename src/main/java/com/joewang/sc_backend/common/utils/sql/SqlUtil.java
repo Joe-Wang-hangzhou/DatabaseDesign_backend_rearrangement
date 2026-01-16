@@ -6,7 +6,7 @@ import com.joewang.sc_backend.common.utils.StringUtils;
 /**
  * sql操作工具类
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 public class SqlUtil
 {

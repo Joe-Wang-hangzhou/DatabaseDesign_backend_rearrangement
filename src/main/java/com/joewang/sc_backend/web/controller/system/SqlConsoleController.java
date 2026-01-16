@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * SQL����̨Controller
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 @RestController
 @RequestMapping("/system/sqlConsole")

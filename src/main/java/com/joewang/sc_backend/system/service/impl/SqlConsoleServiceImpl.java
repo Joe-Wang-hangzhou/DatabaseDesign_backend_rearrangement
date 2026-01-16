@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * SQL����̨ ҵ��㴦��
  * 
- * @author ruoyi
+ * @author 王超浩
  */
 @Service
 public class SqlConsoleServiceImpl implements ISqlConsoleService
