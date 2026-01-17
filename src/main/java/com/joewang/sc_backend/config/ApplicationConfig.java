@@ -1,6 +1,5 @@
 package com.joewang.sc_backend.config;
 
-import java.util.TimeZone;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -16,12 +15,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @MapperScan("com.joewang.sc_backend.**.mapper")
 public class ApplicationConfig
 {
-//    /**
-//     * 时区配置
-//     */
-//    @Bean
-//    public Jackson2ObjectMapperBuilderCustomizer jacksonObjectMapperCustomization()
-//    {
-//        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.timeZone(TimeZone.getDefault());
-//    }
+
 }
