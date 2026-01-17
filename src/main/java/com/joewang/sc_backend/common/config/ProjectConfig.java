@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author 王超浩
  */
 @Component
-@ConfigurationProperties(prefix = "ruoyi")
+@ConfigurationProperties(prefix = "score-system")
 public class ProjectConfig
 {
     /** 项目名称 */
@@ -24,11 +24,7 @@ public class ProjectConfig
     /** 上传路径 */
     private static String profile;
 
-    /** 获取地址开关 */
-    private static boolean addressEnabled;
 
-    /** 验证码类型 */
-    private static String captchaType;
 
     public String getName()
     {
@@ -70,23 +66,6 @@ public class ProjectConfig
         ProjectConfig.profile = profile;
     }
 
-    public static boolean isAddressEnabled()
-    {
-        return addressEnabled;
-    }
-
-    public void setAddressEnabled(boolean addressEnabled)
-    {
-        ProjectConfig.addressEnabled = addressEnabled;
-    }
-
-    public static String getCaptchaType() {
-        return captchaType;
-    }
-
-    public void setCaptchaType(String captchaType) {
-        ProjectConfig.captchaType = captchaType;
-    }
 
     /**
      * 获取导入上传路径
@@ -96,13 +75,6 @@ public class ProjectConfig
         return getProfile() + "/import";
     }
 
-    /**
-     * 获取头像上传路径
-     */
-    public static String getAvatarPath()
-    {
-        return getProfile() + "/avatar";
-    }
 
     /**
      * 获取下载路径
@@ -112,11 +84,4 @@ public class ProjectConfig
         return getProfile() + "/download/";
     }
 
-    /**
-     * 获取上传路径
-     */
-    public static String getUploadPath()
-    {
-        return getProfile() + "/upload";
-    }
 }

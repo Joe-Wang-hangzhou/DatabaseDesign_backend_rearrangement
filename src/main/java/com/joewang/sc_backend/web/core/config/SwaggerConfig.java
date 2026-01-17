@@ -28,7 +28,7 @@ public class SwaggerConfig
 {
     /** 系统基础配置 */
     @Autowired
-    private ProjectConfig ruoyiConfig;
+    private ProjectConfig projectConfig;
 
     /** 是否开启swagger */
     @Value("${swagger.enabled}")
@@ -53,12 +53,8 @@ public class SwaggerConfig
                 .select()
                 // 扫描所有有注解的api，用这种方式更灵活
                 .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                // 扫描指定包中的swagger注解
-                // .apis(RequestHandlerSelectors.basePackage("com.ruoyi.project.tool.swagger"))
-                // 扫描所有 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                /* 设置安全模式，swagger可以设置访问token */
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts())
                 .pathMapping(pathMapping);
@@ -113,9 +109,9 @@ public class SwaggerConfig
                 // 描述
                 .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
                 // 作者信息
-                .contact(new Contact(ruoyiConfig.getName(), null, null))
+                .contact(new Contact(projectConfig.getName(), null, null))
                 // 版本
-                .version("版本号:" + ruoyiConfig.getVersion())
+                .version("版本号:" + projectConfig.getVersion())
                 .build();
     }
 }
