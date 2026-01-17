@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.web.mapper.ScMajorMapper">
+    
+    <resultMap type="ScMajor" id="ScMajorResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="collegeId"    column="college_id"    />
+    </resultMap>
+
+    <sql id="selectScMajorVo">
+        select id, name, college_id from sc_major
+    </sql>
+
+    <select id="selectScMajorList" parameterType="ScMajor" resultMap="ScMajorResult">
+        <include refid="selectScMajorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="collegeId != null "> and college_id = #{collegeId}</if>
+        </where>
+    </select>
+    
+    <select id="selectScMajorById" parameterType="Long" resultMap="ScMajorResult">
+        <include refid="selectScMajorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScMajor" parameterType="ScMajor" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_major
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="collegeId != null">college_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="collegeId != null">#{collegeId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScMajor" parameterType="ScMajor">
+        update sc_major
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScMajorById" parameterType="Long">
+        delete from sc_major where id = #{id}
+    </delete>
+
+    <delete id="deleteScMajorByIds" parameterType="String">
+        delete from sc_major where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

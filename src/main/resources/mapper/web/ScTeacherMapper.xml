@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.web.mapper.ScTeacherMapper">
+    
+    <resultMap type="ScTeacher" id="ScTeacherResult">
+        <result property="id"    column="id"    />
+        <result property="teacherNo"    column="teacher_no"    />
+        <result property="name"    column="name"    />
+        <result property="title"    column="title"    />
+        <result property="collegeId"    column="college_id"    />
+    </resultMap>
+
+    <sql id="selectScTeacherVo">
+        select id, teacher_no, name, title, college_id from sc_teacher
+    </sql>
+
+    <select id="selectScTeacherList" parameterType="ScTeacher" resultMap="ScTeacherResult">
+        <include refid="selectScTeacherVo"/>
+        <where>  
+            <if test="teacherNo != null  and teacherNo != ''"> and teacher_no = #{teacherNo}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="collegeId != null "> and college_id = #{collegeId}</if>
+        </where>
+    </select>
+    
+    <select id="selectScTeacherById" parameterType="Long" resultMap="ScTeacherResult">
+        <include refid="selectScTeacherVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScTeacher" parameterType="ScTeacher" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">teacher_no,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="title != null">title,</if>
+            <if test="collegeId != null">college_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">#{teacherNo},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="title != null">#{title},</if>
+            <if test="collegeId != null">#{collegeId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScTeacher" parameterType="ScTeacher">
+        update sc_teacher
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherNo != null and teacherNo != ''">teacher_no = #{teacherNo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScTeacherById" parameterType="Long">
+        delete from sc_teacher where id = #{id}
+    </delete>
+
+    <delete id="deleteScTeacherByIds" parameterType="String">
+        delete from sc_teacher where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

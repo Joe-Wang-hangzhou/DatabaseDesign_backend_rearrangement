@@ -6,8 +6,8 @@ import com.joewang.sc_backend.common.core.domain.AjaxResult;
 import com.joewang.sc_backend.common.core.page.TableDataInfo;
 import com.joewang.sc_backend.common.enums.BusinessType;
 import com.joewang.sc_backend.common.utils.poi.ExcelUtil;
-import com.joewang.sc_backend.system.domain.ScEnrollment;
-import com.joewang.sc_backend.system.service.IScEnrollmentService;
+import com.joewang.sc_backend.web.domain.ScEnrollment;
+import com.joewang.sc_backend.web.service.IScEnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

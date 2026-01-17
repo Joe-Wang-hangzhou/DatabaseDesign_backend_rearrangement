@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joewang.sc_backend.web.mapper.ScStudentMapper">
+    
+    <resultMap type="ScStudent" id="ScStudentResult">
+        <result property="id"    column="id"    />
+        <result property="studentNo"    column="student_no"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="classId"    column="class_id"    />
+        <result property="enrollmentYear"    column="enrollment_year"    />
+    </resultMap>
+
+    <sql id="selectScStudentVo">
+        select id, student_no, name, gender, class_id, enrollment_year from sc_student
+    </sql>
+
+    <select id="selectScStudentList" parameterType="ScStudent" resultMap="ScStudentResult">
+        <include refid="selectScStudentVo"/>
+        <where>  
+            <if test="studentNo != null  and studentNo != ''"> and student_no = #{studentNo}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="classId != null "> and class_id = #{classId}</if>
+            <if test="enrollmentYear != null  and enrollmentYear != ''"> and enrollment_year = #{enrollmentYear}</if>
+        </where>
+    </select>
+    
+    <select id="selectScStudentById" parameterType="Long" resultMap="ScStudentResult">
+        <include refid="selectScStudentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScStudent" parameterType="ScStudent" useGeneratedKeys="true" keyProperty="id">
+        insert into sc_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentNo != null and studentNo != ''">student_no,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="classId != null">class_id,</if>
+            <if test="enrollmentYear != null">enrollment_year,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentNo != null and studentNo != ''">#{studentNo},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="classId != null">#{classId},</if>
+            <if test="enrollmentYear != null">#{enrollmentYear},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScStudent" parameterType="ScStudent">
+        update sc_student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentNo != null and studentNo != ''">student_no = #{studentNo},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="classId != null">class_id = #{classId},</if>
+            <if test="enrollmentYear != null">enrollment_year = #{enrollmentYear},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScStudentById" parameterType="Long">
+        delete from sc_student where id = #{id}
+    </delete>
+
+    <delete id="deleteScStudentByIds" parameterType="String">
+        delete from sc_student where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
