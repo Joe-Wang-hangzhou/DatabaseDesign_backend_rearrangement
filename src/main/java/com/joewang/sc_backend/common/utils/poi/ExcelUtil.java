@@ -4,12 +4,11 @@ import com.joewang.sc_backend.common.annotation.Excel;
 import com.joewang.sc_backend.common.annotation.Excel.ColumnType;
 import com.joewang.sc_backend.common.annotation.Excel.Type;
 import com.joewang.sc_backend.common.annotation.Excels;
-import com.joewang.sc_backend.common.config.RuoYiConfig;
+import com.joewang.sc_backend.common.config.ProjectConfig;
 import com.joewang.sc_backend.common.core.domain.AjaxResult;
 import com.joewang.sc_backend.common.core.text.Convert;
 import com.joewang.sc_backend.common.exception.UtilException;
 import com.joewang.sc_backend.common.utils.DateUtils;
-import com.joewang.sc_backend.common.utils.DictUtils;
 import com.joewang.sc_backend.common.utils.StringUtils;
 import com.joewang.sc_backend.common.utils.file.FileTypeUtils;
 import com.joewang.sc_backend.common.utils.file.FileUtils;
@@ -1051,13 +1050,8 @@ public class ExcelUtil<T>
             String[] comboArray = attr.combo();
             if (attr.comboReadDict())
             {
-                if (!sysDictMap.containsKey("combo_" + attr.dictType()))
-                {
-                    String labels = DictUtils.getDictLabels(attr.dictType());
-                    sysDictMap.put("combo_" + attr.dictType(), labels);
-                }
-                String val = sysDictMap.get("combo_" + attr.dictType());
-                comboArray = StringUtils.split(val, DictUtils.SEPARATOR);
+                // 字典功能已移除，直接使用combo数组
+                // 如果需要字典功能，请实现自己的字典服务
             }
             if (comboArray.length > 15 || StringUtils.join(comboArray).length() > 255)
             {
@@ -1334,7 +1328,8 @@ public class ExcelUtil<T>
      */
     public static String convertDictByExp(String dictValue, String dictType, String separator)
     {
-        return DictUtils.getDictLabel(dictType, dictValue, separator);
+        // 字典功能已移除，直接返回原值
+        return dictValue;
     }
 
     /**
@@ -1347,7 +1342,8 @@ public class ExcelUtil<T>
      */
     public static String reverseDictByExp(String dictLabel, String dictType, String separator)
     {
-        return DictUtils.getDictValue(dictType, dictLabel, separator);
+        // 字典功能已移除，直接返回原值
+        return dictLabel;
     }
 
     /**
@@ -1433,7 +1429,7 @@ public class ExcelUtil<T>
      */
     public String getAbsoluteFile(String filename)
     {
-        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        String downloadPath = ProjectConfig.getDownloadPath() + filename;
         File desc = new File(downloadPath);
         if (!desc.getParentFile().exists())
         {

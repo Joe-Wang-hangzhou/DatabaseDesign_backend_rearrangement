@@ -1,7 +1,6 @@
 package com.joewang.sc_backend.system.domain;
 
 import com.joewang.sc_backend.common.core.domain.BaseEntity;
-import com.joewang.sc_backend.common.xss.Xss;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -47,7 +46,6 @@ public class SysNotice extends BaseEntity
         this.noticeTitle = noticeTitle;
     }
 
-    @Xss(message = "公告标题不能包含脚本字符")
     @NotBlank(message = "公告标题不能为空")
     @Size(min = 0, max = 50, message = "公告标题不能超过50个字符")
     public String getNoticeTitle()

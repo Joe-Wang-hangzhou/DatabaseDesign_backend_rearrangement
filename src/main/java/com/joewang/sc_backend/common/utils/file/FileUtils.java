@@ -1,6 +1,6 @@
 package com.joewang.sc_backend.common.utils.file;
 
-import com.joewang.sc_backend.common.config.RuoYiConfig;
+import com.joewang.sc_backend.common.config.ProjectConfig;
 import com.joewang.sc_backend.common.constant.Constants;
 import com.joewang.sc_backend.common.utils.DateUtils;
 import com.joewang.sc_backend.common.utils.StringUtils;
@@ -69,7 +69,7 @@ public class FileUtils
      */
     public static String writeImportBytes(byte[] data) throws IOException
     {
-        return writeBytes(data, RuoYiConfig.getImportPath());
+        return writeBytes(data, ProjectConfig.getImportPath());
     }
 
     /**
@@ -88,7 +88,7 @@ public class FileUtils
         {
             String extension = getFileExtendName(data);
             pathName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
-            File file = FileUploadUtils.getAbsoluteFile(uploadDir, pathName);
+            File file = getAbsoluteFile(uploadDir, pathName);
             fos = new FileOutputStream(file);
             fos.write(data);
         }
@@ -96,7 +96,33 @@ public class FileUtils
         {
             IOUtils.close(fos);
         }
-        return FileUploadUtils.getPathFileName(uploadDir, pathName);
+        return getPathFileName(uploadDir, pathName);
+    }
+
+    /**
+     * 获取绝对文件路径
+     */
+    private static File getAbsoluteFile(String uploadDir, String fileName) throws IOException
+    {
+        File desc = new File(uploadDir + File.separator + fileName);
+        if (!desc.exists())
+        {
+            if (!desc.getParentFile().exists())
+            {
+                desc.getParentFile().mkdirs();
+            }
+        }
+        return desc;
+    }
+
+    /**
+     * 获取文件路径名
+     */
+    private static String getPathFileName(String uploadDir, String fileName)
+    {
+        int dirLastIndex = uploadDir.lastIndexOf("/") + 1;
+        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
     /**

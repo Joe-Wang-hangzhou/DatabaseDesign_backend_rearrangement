@@ -1,6 +1,6 @@
 package com.joewang.sc_backend.web.core.config;
 
-import com.joewang.sc_backend.common.config.RuoYiConfig;
+import com.joewang.sc_backend.common.config.ProjectConfig;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class SwaggerConfig
 {
     /** 系统基础配置 */
     @Autowired
-    private RuoYiConfig ruoyiConfig;
+    private ProjectConfig ruoyiConfig;
 
     /** 是否开启swagger */
     @Value("${swagger.enabled}")
