@@ -1,0 +1,49 @@
+-- 清理若依框架残留表
+-- 执行日期: 2026-01-17
+-- 警告: 此脚本将删除所有若依框架的表，请确保已备份数据库！
+
+-- USE `ry-vue`;
+USE `score_system`;
+
+-- 删除代码生成工具表
+DROP TABLE IF EXISTS `gen_table_column`;
+DROP TABLE IF EXISTS `gen_table`;
+
+-- 删除Quartz定时任务表（注意顺序，先删除有外键的表）
+DROP TABLE IF EXISTS `QRTZ_BLOB_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_CRON_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_SIMPLE_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_SIMPROP_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_CALENDARS`;
+DROP TABLE IF EXISTS `QRTZ_FIRED_TRIGGERS`;
+DROP TABLE IF EXISTS `QRTZ_JOB_DETAILS`;
+DROP TABLE IF EXISTS `QRTZ_LOCKS`;
+DROP TABLE IF EXISTS `QRTZ_PAUSED_TRIGGER_GRPS`;
+DROP TABLE IF EXISTS `QRTZ_SCHEDULER_STATE`;
+
+-- 删除系统管理关联表（有外键约束，先删除）
+DROP TABLE IF EXISTS `sys_role_menu`;
+DROP TABLE IF EXISTS `sys_role_dept`;
+DROP TABLE IF EXISTS `sys_user_role`;
+DROP TABLE IF EXISTS `sys_user_post`;
+
+-- 删除系统管理主表
+DROP TABLE IF EXISTS `sys_config`;
+DROP TABLE IF EXISTS `sys_dept`;
+DROP TABLE IF EXISTS `sys_dict_data`;
+DROP TABLE IF EXISTS `sys_dict_type`;
+DROP TABLE IF EXISTS `sys_job_log`;
+DROP TABLE IF EXISTS `sys_job`;
+DROP TABLE IF EXISTS `sys_logininfor`;
+DROP TABLE IF EXISTS `sys_menu`;
+DROP TABLE IF EXISTS `sys_notice`;
+DROP TABLE IF EXISTS `sys_oper_log`;
+DROP TABLE IF EXISTS `sys_post`;
+DROP TABLE IF EXISTS `sys_role`;
+DROP TABLE IF EXISTS `sys_user`;
+
+-- 显示剩余的表
+SELECT '✅ 若依框架表清理完成！' AS Status;
+SELECT '📋 当前数据库中的表:' AS Info;
+SHOW TABLES;
