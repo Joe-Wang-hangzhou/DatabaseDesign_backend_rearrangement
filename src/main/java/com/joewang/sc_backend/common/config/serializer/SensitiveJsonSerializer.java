@@ -24,14 +24,8 @@ public class SensitiveJsonSerializer extends JsonSerializer<String> implements C
     @Override
     public void serialize(String value, JsonGenerator gen, SerializerProvider serializers) throws IOException
     {
-        if (desensitization())
-        {
-            gen.writeString(desensitizedType.desensitizer().apply(value));
-        }
-        else
-        {
-            gen.writeString(value);
-        }
+        gen.writeString(desensitizedType.desensitizer().apply(value));
+
     }
 
     @Override
@@ -47,12 +41,5 @@ public class SensitiveJsonSerializer extends JsonSerializer<String> implements C
         return prov.findValueSerializer(property.getType(), property);
     }
 
-    /**
-     * 是否需要脱敏处理
-     * 由于项目不需要登录功能，默认总是进行脱敏处理
-     */
-    private boolean desensitization()
-    {
-        return true;
-    }
+
 }
